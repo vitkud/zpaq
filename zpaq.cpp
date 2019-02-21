@@ -1,6 +1,6 @@
 // zpaq.cpp - Journaling incremental deduplicating archiver
 
-#define ZPAQ_VERSION "7.15"
+#define ZPAQ_VERSION "7.15.1"
 /*
   This software is provided as-is, with no warranty.
   I, Matt Mahoney, release this software into
@@ -516,7 +516,7 @@ void close(const char* filename, int64_t date, int64_t attr, FP fp=FPNULL) {
     chmod(filename, attr>>8);
 #else
   const bool ads=strstr(filename, ":$DATA")!=0;  // alternate data stream?
-  if (date>0 && !ads) {
+  if (date>0) {
     if (fp==FPNULL)
       fp=CreateFile(utow(filename).c_str(),
                     FILE_WRITE_ATTRIBUTES,
